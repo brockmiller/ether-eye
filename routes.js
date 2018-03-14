@@ -6,7 +6,7 @@ router.get('/', (req, res) => res.send('Hello World'))
 
 // ADDRESS ROUTES
 router.get('/addresses', addresses.getAddresses)
-router.post('/addresses/:address', addresses.createAddress)
+router.post('/addresses', addresses.createAddress)
 router.get('/addresses/:address', addresses.getAddress)
 router.get('/addresses/:address/transactions', addresses.getTransactionsForAddress)
 router.get('/addresses/:address/balances', addresses.getBalancesForAddress)

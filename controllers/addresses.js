@@ -1,9 +1,23 @@
+const Address = require('../models/address')
+
 const getAddresses = (req, res) => {
   res.send('list of addresses')
 }
 
-const createAddress = (req, res) => {
-  res.send('creating address: ' + req.params.address)
+const createAddress = async (req, res) => {
+  if (!req.body.address) {
+    return res.status(422).send('bad input')
+  }
+
+  const addr = new Address({ address: req.body.address })
+  try {
+    await addr.save()
+    console.log('saved addr')
+    res.status(201).send(addr.address)
+  } catch (e) {
+    console.log('error ' + e)
+    res.status(409).send()
+  }
 }
 
 const getAddress = (req, res) => {
