@@ -4,5 +4,15 @@
   "main": "app.js",
   "repository": "git@github.com:brockmiller/ether-eye.git",
   "author": "Brock Miller <brockmiller@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.3",
+    "mongoose": "^5.0.10"
+  },
+  "scripts": {
+    "dev": "nodemon app.js"
+  },
+  "devDependencies": {
+    "nodemon": "^1.17.2"
+  }
 }
