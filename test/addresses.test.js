@@ -1,11 +1,9 @@
 require('./helper')
 const app = require('../app').app
-const chai = require('chai')
 const request = require('supertest')
 const Address = require('../models/address')
 const Transaction = require('../models/transaction')
 const AddressPopulatingService = require('../lib/addressPopulatingService')
-const sinon = require('sinon')
 const _ = require('lodash')
 const txFixture = require('./fixtures/transactions')
 
@@ -34,7 +32,7 @@ describe('Addresses API Tests', () => {
 
     it('calls to populate transaction and balance data when given a valid address', async () => {
       const address = '0x1d3ed563891ead9319cf9df08536025ae0d1b0bf'
-      const stub = sinon.stub(AddressPopulatingService.prototype, 'perform')
+      const stub = sandbox.stub(AddressPopulatingService.prototype, 'perform')
 
       const response = await request(app).post('/addresses').send({ address: address })
 
@@ -130,6 +128,19 @@ describe('Addresses API Tests', () => {
         expect(response.body.transactions.length).to.equal(2)
         expect(response.body.transactions[0].blockNumber).to.equal(startBlock)
         expect(response.body.transactions[1].blockNumber).to.equal(endBlock)
+      })
+
+      context('when the address status is not OK', () => {
+        before(async () => {
+          record.status = 'PENDING'
+          await record.save()
+        })
+
+        it('does not include any transactions in the response', async () => {
+          const response = await request(app).get(path)
+          expect(response.body.address).to.include(_.pick(record, 'address', 'status'))
+          expect(response.body.transactions.length).to.equal(0)
+        })
       })
     })
   })

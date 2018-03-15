@@ -6,5 +6,10 @@ module.exports = {
     name: process.env.DB_NAME || 'ether-eye'
   },
   port: process.env.PORT || 3000,
-  etherscanApiKey: 'B36MHYW97QWKU4BTRAJ6587JG55UDW7ANN'
+  etherscan: {
+    apiKey: 'B36MHYW97QWKU4BTRAJ6587JG55UDW7ANN',
+    timeoutMs: 25000,
+    // Max transaction response size from Etherscan API
+    maxTxSize: 10000
+  }
 }

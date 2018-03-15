@@ -16,7 +16,8 @@
   },
   "scripts": {
     "dev": "nodemon app.js",
-    "test": "NODE_ENV=test DB_NAME=test mocha --exit"
+    "test": "NODE_ENV=test DB_NAME=test PORT=3001 mocha --exit --recursive",
+    "server": "node app.js"
   },
   "devDependencies": {
     "chai": "^4.1.2",
