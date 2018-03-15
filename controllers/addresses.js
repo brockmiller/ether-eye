@@ -7,13 +7,6 @@ const web3 = require('web3-utils')
 // Thist may be overridden on a per-endpoint basis.
 const defaultLimit = 100
 
-// Returns a list of Ethereum Addresses which have been observed by this service
-const getAddresses = async (req, res, next) => {
-  const limit = req.query.limit || defaultLimit
-  const addresses = await Address.find().limit(limit)
-  res.send(addresses)
-}
-
 // Creates a new Ethereum Address record and attempts to fetch transaction and balance information for the
 // address.
 const createAddress = async (req, res, next) => {
@@ -122,9 +115,16 @@ const getTransactionsForAddress = async (req, res, next) => {
   })
 }
 
+// Index method: Returns a list of Ethereum Addresses which have been observed by this service
+const getAddresses = async (req, res, next) => {
+  const limit = req.query.limit || defaultLimit
+  const addresses = await Address.find().limit(limit)
+  res.send(addresses)
+}
+
 module.exports = {
-  getAddresses,
   createAddress,
   getAddress,
-  getTransactionsForAddress
+  getTransactionsForAddress,
+  getAddresses
 }
