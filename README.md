@@ -18,6 +18,18 @@ Before running the server, you will need to be running a mongodb instance locall
   ```
 And then follow the instructions at the end of the brew installation to get `mongod` running on your machine. If you have trouble, try following the directions at this link:  https://treehouse.github.io/installation-guides/mac/mongo-mac.html
 
+Run the tests
+  ```bash
+  yarn run test
+  OR
+  npm run test
+  ```
+  
+Run the server locally
+  ```bash
+  yarn run server
+  ```
+
 ## APIs
 By default, the server listens for requests on port `3000`, which can be modified using the `PORT` environment variable or by modifying the `config.js` file in the project root. This service exposes 4 primary RESTful APIs which support the JSON data format.
 
